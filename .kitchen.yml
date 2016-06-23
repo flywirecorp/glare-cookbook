@@ -1,0 +1,43 @@
+---
+driver:
+  name: dokken
+  privileged: false
+  chef_version: 12.7.2
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+
+platforms:
+- name: debian
+  driver_config:
+    image: debian:8.4
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update &&
+        /usr/bin/apt-get install apt-transport-https net-tools curl openssl --yes --no-install-recommends &&
+        curl -L http://httpredir.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20130119%2bdeb7u1_all.deb -o ca-certificates_20130119+deb7u1_all.deb &&
+        dpkg -i ca-certificates_20130119+deb7u1_all.deb
+
+verifier:
+  name: inspec
+  root_path: '/opt/verifier'
+  sudo: false
+
+suites:
+  - name: add
+    run_list:
+      - recipe[glare_test::add]
+    attributes:
+      glare:
+        email: <%= ENV['CF_EMAIL'] %>
+        auth_key: <%= ENV['CF_AUTH_KEY'] %>
+  - name: remove
+    run_list:
+      - recipe[glare_test::add]
+      - recipe[glare_test::remove]
+    attributes:
+      glare:
+        email: <%= ENV['CF_EMAIL'] %>
+        auth_key: <%= ENV['CF_AUTH_KEY'] %>
