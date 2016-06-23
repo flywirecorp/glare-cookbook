@@ -4,8 +4,6 @@ property :email, String
 property :auth_key, String
 
 action :add do
-  chef_gem 'glare'
-
   require 'glare'
   ENV['CF_EMAIL'] = email
   ENV['CF_AUTH_KEY'] = auth_key
@@ -13,8 +11,6 @@ action :add do
 end
 
 action :remove do
-  chef_gem 'glare'
-
   require 'glare'
   ENV['CF_EMAIL'] = email
   ENV['CF_AUTH_KEY'] = auth_key
