@@ -9,3 +9,7 @@ group :test do
   gem 'kitchen-dokken'
   gem 'glare'
 end
+
+group :release do
+  gem 'stove'
+end
