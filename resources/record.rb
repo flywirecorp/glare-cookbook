@@ -3,6 +3,8 @@ property :content, [String, Array]
 property :email, String
 property :auth_key, String
 
+default_action :add
+
 action :add do
   require 'glare'
   ENV['CF_EMAIL'] = email
