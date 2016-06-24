@@ -13,7 +13,7 @@ Resources
 
 **record**
 
-- `add` action:
+- `create` action:
 
 ```ruby
 glare_record 'domain.com' do
@@ -22,11 +22,11 @@ glare_record 'domain.com' do
 
   email 'test@email.com'
   auth_key 'example_auth_key'
-  action :add
+  action :create
 end
 ```
 
-- `remove` action:
+- `delete` action:
 
 ```ruby
 glare_record 'domain.com' do
@@ -34,6 +34,6 @@ glare_record 'domain.com' do
 
   email 'test@email.com'
   auth_key 'example_auth_key'
-  action :remove
+  action :delete
 end
 ```

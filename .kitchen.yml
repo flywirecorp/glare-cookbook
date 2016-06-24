@@ -26,17 +26,17 @@ verifier:
   sudo: false
 
 suites:
-  - name: add
+  - name: create
     run_list:
-      - recipe[glare_test::add]
+      - recipe[glare_test::create]
     attributes:
       glare:
         email: <%= ENV['CF_EMAIL'] %>
         auth_key: <%= ENV['CF_AUTH_KEY'] %>
-  - name: remove
+  - name: delete
     run_list:
-      - recipe[glare_test::add]
-      - recipe[glare_test::remove]
+      - recipe[glare_test::create]
+      - recipe[glare_test::delete]
     attributes:
       glare:
         email: <%= ENV['CF_EMAIL'] %>

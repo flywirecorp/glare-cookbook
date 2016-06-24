@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'glare'
 
-RSpec.describe 'glare_test::remove' do
+RSpec.describe 'glare_test::delete' do
   let(:runner) { ChefSpec::SoloRunner.new(step_into: ['glare_record']) }
   subject { runner.converge(described_recipe) }
 

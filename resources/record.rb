@@ -3,16 +3,16 @@ property :content, [String, Array]
 property :email, String
 property :auth_key, String
 
-default_action :add
+default_action :create
 
-action :add do
+action :create do
   require 'glare'
   ENV['CF_EMAIL'] = email
   ENV['CF_AUTH_KEY'] = auth_key
   Glare.register(name, content, type)
 end
 
-action :remove do
+action :delete do
   require 'glare'
   ENV['CF_EMAIL'] = email
   ENV['CF_AUTH_KEY'] = auth_key
