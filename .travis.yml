@@ -27,12 +27,13 @@ before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken glare
+  - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/cookstyle --version
   - /opt/chefdk/embedded/bin/foodcritic --version
 
-script: KITCHEN_LOCAL_YAML=.kitchen.yml kitchen verify ${INSTANCE}
+script:
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "true" ]; then KITCHEN_LOCAL_YAML=.kitchen.yml kitchen verify ${INSTANCE}; fi'
 
 after_script:
   - docker images
@@ -45,5 +46,7 @@ matrix:
     env:  COOKSTYLE=1
   - script: /opt/chefdk/embedded/bin/foodcritic . --exclude spec -f any -P
     env:  FOODCRITIC=1
-  - script: /opt/chefdk/embedded/bin/rspec
+  - script:
+      - /opt/chefdk/embedded/bin/chef gem install glare
+      - /opt/chefdk/embedded/bin/rspec
     env:  CHEFSPEC=1
