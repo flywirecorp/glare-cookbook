@@ -1,5 +1,18 @@
 # glare cookbook CHANGELOG
 
+## 1.0.3
+
+- Use rake for stove
+- Upload extended metadata to supermarket
+
+## 1.0.2
+
+- Update cookbook description
+
+## 1.0.1
+
+- Bump version to upload it with metadata
+
 ## 1.0.0
 
 - Rename `add` action to `create` and `remove` to `delete`
