@@ -8,9 +8,7 @@ Build Status
 ============
 
 [![Build Status](https://travis-ci.org/peertransfer/glare-cookbook.svg?branch=master)](https://travis-ci.org/peertransfer/glare-cookbook)
-[![Coverage Status](https://coveralls.io/repos/github/peertransfer/glare-cookbook/badge.svg?branch=master)](https://coveralls.io/github/peertransfer/glare-cookbook?branch=master)
 [![Code Climate](https://codeclimate.com/github/peertransfer/glare-cookbook/badges/gpa.svg)](https://codeclimate.com/github/peertransfer/glare-cookbook)
-[![Dependency Status](https://gemnasium.com/peertransfer/glare-cookbook.svg)](https://gemnasium.com/peertransfer/glare-cookbook)
 
 Usage
 =====
