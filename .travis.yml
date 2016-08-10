@@ -1,52 +1,40 @@
 sudo: required
 dist: trusty
-
-# install the pre-release chef-dk.  Use chef-stable-precise to install the stable release
 addons:
   apt:
     sources:
       - chef-current-trusty
     packages:
       - chefdk
-
-# Don't `bundle install` which takes about 0.5 mins
 install: echo "skip bundle install"
-
 services: docker
-
 env:
   matrix:
     - INSTANCE=create-debian
     - INSTANCE=delete-debian
   global:
-    - secure: REcY0G4vIdkHIunXIWJrqjqOrCreFRQtHcP5kQ4qD/X4gIEjoo560ysOVvZ3qhNcHNo4LSea6xWB6xGqKv4SJZJ3b9SYkBoqS3fu+LlUBGMnLmv124dnnWmHftL1ri5BqwwEzLqVV9A3q6neJx93Qa+tIYr5veBvHgQn4saPthXWqRgoZdQUc2QInnLhvwHcCnJiuhsnz8cXXKD1kufwfGPtpYx4aHEqQTif5Yo7/FzO3UGmDn/k9vb92s947XW77MtT2dbUVXlJgenukTkvAEq3YvjArcbKZ6qMSu3no1h/PUgswKR8N12E4Mj2OIKWJMLKtHJvJPz7bv0vrWji/f/wYbo0FcZ6NpSGBs07PMleXN7r1ld0u3tg4uLa4i/2TDqcbYAJ/AkoMCYqB2lr7AcA4Kr7wD52dHrQigX54bQRpeoALuBHUqEn/pMFozKKWs/tXARqJ4py6rEGAaMxpWfg7pUX6ml2kaGJIoQIu17F+TVpSEmWD5E2cMwCS2ggw0rwarbg1MSViQY9bLCRM4NYPsZAQFwlt2HxoM6hrLkIodZ8AMYiOhOA/xLy5Nz0OkCPYmizrljQ/R4uq8F2YLLUCxPoT10bg/QIvsY4OnJIBdD0CY/LmnSquEGbCuXjjIDUONSJkSfds8r7TXQFDDLSaOQe9Nla/K0nAI64mvI=
-    - secure: pYFL9tE6MgADgNeHxS165WrvhdRCjqJSdXu44L0BY2modOYwoNRdZBAzQiZvoH0QEg0NqLrLTGI1OxTE1Iz3PgD/eSDJW8mW3TZZ6AzB1JMuYVAQofvqL7Gj6GrXwdbFpDZUSOs2AtBZx4AcA4ciFwtqiEgx9g6VsEiLSGMTM41AMIrPvYC3MGV95TYgkkmbWQ3v3v0yuo01ocicnIdek5bERUY6rYxY7AVvlajlH1J6SH1t0ikCKtV5wZGcKlfIKrp9hmSErU+dZVNZjmfd18zxDZSyvfULl6UogdihWWtJfhWlbSzaNkeXhIZG+uwolD0COCHlrVqZqlUkaUL3KIsE0u4EfszEWwYu9MR7zz9O6mMI6ounIN8dyYVGhd72fgC3kBLq34zIWt0ASz7O10wCjF7X8iLbRc5li/xjvVTKlZQpEsu3w/bSgZ1j4Ql8BcUZcnfFHM7GtYeVZZvZ9pwYOnNrDxigp8fVV7kCG/sz/n3knKhLsjwKoTB3YtMRMmc7SdGil8OC175ntFvQRwM5XxBkx0mFboCke7rR/q1CD8wmkgTdh1teaYF9OxP8TtUk6lB/ojxfNjz7ZPWB7DaDjQzFuXUdG6i/kSLs1I44FGBI9wbdTtpOhAvxzD9Y+iCpB4MitIUyDqfbR6zDWlPrCq0ekRCfrIoPEZCtI1g=
-
-# Ensure we make ChefDK's Ruby the default
+    - secure: kw86W69QF8VSeTbmueZ2zPfhlV0f9id+XwLTYQyLOEm0yh0HbyBraLbw8BRjpBQf2wJYyV8G+5Xzcbs9eMj+buFEhfhGklYc/+M791GAdfb5SuQkkk8PXEXUjUVBWKkup+QN8sh6sKvOpFcrmui7Cm4we55zoz1Sbpn3GSEoIfhpnAJpnIw6Acyzto53i4B6o/V7Vqnlu/9YF27xSRt936qdh9kg6NCs2wIe2zClw93RCYzPsjo4PzLwbLU/9HmOKYynb4/zhXBtUaVSimV42nW/Nc/Jh4rikmHSqyblZLyWZ5FfgAmh+EZ647rBJNcRXV1s/d5zGajNl9h3VjaDVvrrJqny5nzlq11GYe5aJ7P7P2hzwfvRm5a5YVTFWmrXK1Xz413uhJDElA16s8griCHGTOtuPQqZoCEKC/da3rMdoiXkF2Ly2sw3Nj1XxMwEAWpluo1MkIg134cZJIrwD5ueVrHwESLd+zZeg4S8hxODjj34tCeAHEBDGkUK8hLlTIH7zNpQHNZVBF5RVoJkds9jc3c27sRBfrK2kf97pn89zjRdwkWlPFlvgT8aoU/zT/1YmlyhGzkeLYllDZiRZOpjKdimk+g7AGBkdC+rdl8ZhF5kFfihLU4rA9ROiKkRRJiZm/vDgcu6pyeDR5Lf7q5EJbJj9TLjobK780Nw4dQ=
+    - secure: TyaTGSqLmmNfqICe0py60xtwO0rGGEtcdaK7r99GnKpA4WOTu6E00F4pZBprBpYYwSp2nlcWYVu7F97/bRAOnBSBRPg2n+obHa0vgw8YO4z+bwDf/Ws81heC/hlpnw3UVa8sZEuTQ9PuCqrf6yF537jQYm1wFMtFMEbD27I5SssG/kcSzu8UDyseS27uR+xQquHa0uxZfAmUmEBBg/kc7WmQ0J1mOsy5fXEplNrbdLxtnrSli7jBb90cKJe9Qt7StMrs09VQb2NRiWo+euv9Byek4blhrhDn5Oee+ZVhZHT/XtjHMwO/gyBFXrKsLCzmrHVzxt7sVvRm4LNGdYMxK/UY6EPS37p8jYp3G5A3sFkcOdBAiNFrRvC+24urEg4S6nwmrnP/r2qk9tBrP/u1pWHVAtj/FdOtmDT6EuXOK8V6IQXstNgyzXIX01jgiUn7S1Q94WwZ6r2GdjCjwGNFkq/Bu8JTabGwkhBTvGR7oRA5Ggd37I6Xpb1LyJUIq33hyg0HxcLoEEFPZsdJz51Z3qVtHaxQUMBEJRXXtvEi7vb2j+iOnrqdfw0xNrq7vqhdCQ364gkSyCbvGv33qUZvsRnxzApB/n2/tNbNtVYjPOSdh7Vy6YSiCmouAkvHViCGxRfCcfXGHvi4azff2jzeUU8afNSWNjEGm55nlv1CS8Y=
 before_script:
-  # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/cookstyle --version
   - /opt/chefdk/embedded/bin/foodcritic --version
-
 script:
   - 'if [ "$TRAVIS_REPO_SLUG" = "peertransfer/glare-cookbook" ]; then KITCHEN_LOCAL_YAML=.kitchen.yml kitchen verify ${INSTANCE}; fi'
-
 after_script:
   - docker images
   - docker ps -a
   - cat .kitchen/logs/kitchen.log
-
 matrix:
   include:
-  - script: /opt/chefdk/embedded/bin/cookstyle
-    env:  COOKSTYLE=1
-  - script: /opt/chefdk/embedded/bin/foodcritic . --exclude spec -f any -P
-    env:  FOODCRITIC=1
-  - script:
-      - /opt/chefdk/embedded/bin/chef gem install glare
-      - /opt/chefdk/embedded/bin/rspec
-    env:  CHEFSPEC=1
+    - script: "/opt/chefdk/embedded/bin/cookstyle"
+      env: COOKSTYLE=1
+    - script: "/opt/chefdk/embedded/bin/foodcritic . --exclude spec -f any -P"
+      env: FOODCRITIC=1
+    - script:
+      - "/opt/chefdk/embedded/bin/chef gem install glare"
+      - "/opt/chefdk/embedded/bin/rspec"
+      env: CHEFSPEC=1
