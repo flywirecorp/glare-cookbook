@@ -1,5 +1,17 @@
 # glare cookbook CHANGELOG
 
+## 1.0.6
+
+- No changes. Uploaded using custom stove version with gem metadata.
+
+## 1.0.5
+
+- No changes. Uploaded using custom stove version. Do not use.
+
+## 1.0.4
+
+- No changes. Uploaded using custom stove version. Do not use.
+
 ## 1.0.3
 
 - Use rake for stove
