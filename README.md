@@ -9,6 +9,7 @@ Build Status
 
 [![Build Status](https://travis-ci.org/peertransfer/glare-cookbook.svg?branch=master)](https://travis-ci.org/peertransfer/glare-cookbook)
 [![Code Climate](https://codeclimate.com/github/peertransfer/glare-cookbook/badges/gpa.svg)](https://codeclimate.com/github/peertransfer/glare-cookbook)
+[![Cookbook Version](https://img.shields.io/cookbook/v/glare.svg)](https://supermarket.chef.io/cookbooks/glare)
 
 Usage
 =====
