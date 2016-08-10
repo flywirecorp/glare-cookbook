@@ -33,7 +33,7 @@ before_script:
   - /opt/chefdk/embedded/bin/foodcritic --version
 
 script:
-  - 'if [ "$TRAVIS_REPO_SLUG" = "peertransfer/glare" ]; then KITCHEN_LOCAL_YAML=.kitchen.yml kitchen verify ${INSTANCE}; fi'
+  - 'if [ "$TRAVIS_REPO_SLUG" = "peertransfer/glare-cookbook" ]; then KITCHEN_LOCAL_YAML=.kitchen.yml kitchen verify ${INSTANCE}; fi'
 
 after_script:
   - docker images
