@@ -11,5 +11,6 @@ group :test do
 end
 
 group :release do
+  gem 'rake'
   gem 'stove'
 end
