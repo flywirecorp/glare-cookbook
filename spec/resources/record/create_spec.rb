@@ -10,7 +10,7 @@ RSpec.describe 'glare_test::create' do
 
     subject
 
-    expect(Glare).to have_received(:register).
-      with('flywire.cc', 'flywire.com', 'CNAME')
+    expect(Glare).to have_received(:register)
+      .with('flywire.cc', 'flywire.com', 'CNAME')
   end
 end

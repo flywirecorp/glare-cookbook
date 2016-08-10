@@ -10,7 +10,7 @@ RSpec.describe 'glare_test::delete' do
 
     subject
 
-    expect(Glare).to have_received(:deregister).
-      with('flywire.cc', 'CNAME')
+    expect(Glare).to have_received(:deregister)
+      .with('flywire.cc', 'CNAME')
   end
 end

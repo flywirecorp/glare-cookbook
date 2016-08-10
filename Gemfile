@@ -12,5 +12,5 @@ end
 
 group :release do
   gem 'rake'
-  gem 'stove'
+  gem 'stove', github: 'peertransfer/stove'
 end
