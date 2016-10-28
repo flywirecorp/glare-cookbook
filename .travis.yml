@@ -1,4 +1,3 @@
-sudo: required
 dist: trusty
 addons:
   apt:
@@ -16,7 +15,6 @@ env:
     - secure: kw86W69QF8VSeTbmueZ2zPfhlV0f9id+XwLTYQyLOEm0yh0HbyBraLbw8BRjpBQf2wJYyV8G+5Xzcbs9eMj+buFEhfhGklYc/+M791GAdfb5SuQkkk8PXEXUjUVBWKkup+QN8sh6sKvOpFcrmui7Cm4we55zoz1Sbpn3GSEoIfhpnAJpnIw6Acyzto53i4B6o/V7Vqnlu/9YF27xSRt936qdh9kg6NCs2wIe2zClw93RCYzPsjo4PzLwbLU/9HmOKYynb4/zhXBtUaVSimV42nW/Nc/Jh4rikmHSqyblZLyWZ5FfgAmh+EZ647rBJNcRXV1s/d5zGajNl9h3VjaDVvrrJqny5nzlq11GYe5aJ7P7P2hzwfvRm5a5YVTFWmrXK1Xz413uhJDElA16s8griCHGTOtuPQqZoCEKC/da3rMdoiXkF2Ly2sw3Nj1XxMwEAWpluo1MkIg134cZJIrwD5ueVrHwESLd+zZeg4S8hxODjj34tCeAHEBDGkUK8hLlTIH7zNpQHNZVBF5RVoJkds9jc3c27sRBfrK2kf97pn89zjRdwkWlPFlvgT8aoU/zT/1YmlyhGzkeLYllDZiRZOpjKdimk+g7AGBkdC+rdl8ZhF5kFfihLU4rA9ROiKkRRJiZm/vDgcu6pyeDR5Lf7q5EJbJj9TLjobK780Nw4dQ=
     - secure: TyaTGSqLmmNfqICe0py60xtwO0rGGEtcdaK7r99GnKpA4WOTu6E00F4pZBprBpYYwSp2nlcWYVu7F97/bRAOnBSBRPg2n+obHa0vgw8YO4z+bwDf/Ws81heC/hlpnw3UVa8sZEuTQ9PuCqrf6yF537jQYm1wFMtFMEbD27I5SssG/kcSzu8UDyseS27uR+xQquHa0uxZfAmUmEBBg/kc7WmQ0J1mOsy5fXEplNrbdLxtnrSli7jBb90cKJe9Qt7StMrs09VQb2NRiWo+euv9Byek4blhrhDn5Oee+ZVhZHT/XtjHMwO/gyBFXrKsLCzmrHVzxt7sVvRm4LNGdYMxK/UY6EPS37p8jYp3G5A3sFkcOdBAiNFrRvC+24urEg4S6nwmrnP/r2qk9tBrP/u1pWHVAtj/FdOtmDT6EuXOK8V6IQXstNgyzXIX01jgiUn7S1Q94WwZ6r2GdjCjwGNFkq/Bu8JTabGwkhBTvGR7oRA5Ggd37I6Xpb1LyJUIq33hyg0HxcLoEEFPZsdJz51Z3qVtHaxQUMBEJRXXtvEi7vb2j+iOnrqdfw0xNrq7vqhdCQ364gkSyCbvGv33qUZvsRnxzApB/n2/tNbNtVYjPOSdh7Vy6YSiCmouAkvHViCGxRfCcfXGHvi4azff2jzeUU8afNSWNjEGm55nlv1CS8Y=
 before_script:
-  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken glare
   - /opt/chefdk/embedded/bin/chef --version
