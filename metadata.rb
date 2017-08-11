@@ -13,6 +13,6 @@ supports 'debian'
 supports 'ubuntu'
 supports 'centos'
 
-chef_version
+chef_version '>= 12.6'
 
-gem 'glare', '> 12.6'
+gem 'glare'
