@@ -6,15 +6,19 @@ property :auth_key, String
 default_action :create
 
 action :create do
-  require 'glare'
-  ENV['CF_EMAIL'] = email
-  ENV['CF_AUTH_KEY'] = auth_key
-  Glare.register(name, content, type)
+  load_glare
+  Glare.register(new_resource.name, new_resource.content, new_resource.type)
 end
 
 action :delete do
-  require 'glare'
-  ENV['CF_EMAIL'] = email
-  ENV['CF_AUTH_KEY'] = auth_key
-  Glare.deregister(name, type)
+  load_glare
+  Glare.deregister(new_resource.name, new_resource.type)
+end
+
+action_class do
+  def load_glare
+    require 'glare'
+    ENV['CF_EMAIL'] = new_resource.email
+    ENV['CF_AUTH_KEY'] = new_resource.auth_key
+  end
 end

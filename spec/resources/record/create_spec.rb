@@ -11,6 +11,6 @@ RSpec.describe 'glare_test::create' do
     subject
 
     expect(Glare).to have_received(:register)
-      .with('flywire.cc', 'flywire.com', 'CNAME')
+      .with('flywire.com.cn', 'flywire.com', 'CNAME')
   end
 end
