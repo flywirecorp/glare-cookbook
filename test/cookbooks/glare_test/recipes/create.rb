@@ -1,6 +1,6 @@
 node.default['glare'] ||= {}
 
-glare_record 'flywire.cc' do
+glare_record 'flywire.com.cn' do
   content 'flywire.com'
   type 'CNAME'
 
