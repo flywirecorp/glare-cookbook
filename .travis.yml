@@ -36,3 +36,13 @@ matrix:
       env: FOODCRITIC=1
     - script: "/opt/chefdk/embedded/bin/rspec"
       env: CHEFSPEC=1
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_e61592b9331f_key -iv $encrypted_e61592b9331f_iv
+    -in .travis/ssh_rsa.enc -out .travis/client.pem -d
+deploy:
+  provider: chef-supermarket
+  user_id: flywire
+  client_key: ".travis/client.pem"
+  cookbook_category: Others
+  on:
+    tags: true
