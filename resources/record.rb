@@ -2,12 +2,13 @@ property :type, String
 property :content, [String, Array]
 property :email, String
 property :auth_key, String
+property :proxied, [TrueClass, FalseClass], default: false
 
 default_action :create
 
 action :create do
   load_glare
-  Glare.register(new_resource.name, new_resource.content, new_resource.type)
+  Glare.register(new_resource.name, new_resource.content, new_resource.type, new_resource.proxied)
 end
 
 action :delete do
