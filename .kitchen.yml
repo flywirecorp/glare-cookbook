@@ -2,23 +2,23 @@
 driver:
   name: dokken
   privileged: false
-  chef_version: 12.12.13
+  chef_version: 15.4.45
 
 transport:
   name: dokken
 
 provisioner:
   name: dokken
+  client_rb:
+    chef_license: "accept-silent"
 
 platforms:
 - name: debian
   driver_config:
-    image: debian:8.4
+    image: debian:10
     intermediate_instructions:
       - RUN /usr/bin/apt-get update &&
-        /usr/bin/apt-get install apt-transport-https net-tools curl openssl --yes --no-install-recommends &&
-        curl -L http://httpredir.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20130119%2bdeb7u1_all.deb -o ca-certificates_20130119+deb7u1_all.deb &&
-        dpkg -i ca-certificates_20130119+deb7u1_all.deb
+        /usr/bin/apt-get install apt-transport-https net-tools curl openssl --yes --no-install-recommends
 
 verifier:
   name: inspec
