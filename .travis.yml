@@ -1,7 +1,3 @@
-os: linux
-
-language: ruby
-
 addons:
   apt:
     sources:
@@ -11,49 +7,40 @@ addons:
 
 install: echo "skip bundle install"
 
+env:
+  - CHEF_LICENSE=accept
+
+branches:
+  only:
+    - master
+
 services: docker
 
 env:
-  jobs:
-    - INSTANCE=create-debian
-    - INSTANCE=delete-debian
-  global:
-    - CHEF_LICENSE=accept-no-persist
-    - secure: NsxRq+GylTi9P3BCm7WNYp0P6NcdMf4dtAu0szpK40tgRy1+fSRFLOaxYwJAHi4spj2knRBOh2Lc/SnhOMj1te36sRSL7h6YQOxYAttvw/0pn5YVgqd8EObU2lHYANSdE29fMVDxVVySwdf/4nA1QBPBkoBi053G/slbbAuWlU880l+cNPeD3Bb7KHMTcik/gx2ENS6gX5SXyRVRs7QOg7e2z4ko4gn5M1l/uT1x76pBhMXxfcww0SOd2WgmaiqZN+H1yWizAQw8qU7cKKw31gCwBGmxf/ZDfexapr1dZK76Hjymy8gQ9n/TifCoiNhLhxEKJqsR5xdTnEDHY9b6D0HUs6eCPwMi+Y3n5WWCMWDi31T2Rzldz32ceu/oGa/qYinlz8fN4tFEeT6bZxKgMqSdePvtPmSin6ZYIHOMO+traoKv6jmETXT/hbWVDOKY3xD5U+afa/Wrl46ZGEoJMyINNjv67tcUO4vGggXkgrtlqI+6+G5xi5p9khizD+wHUWlThRfpQQc0Gmqv7eaYi7hGQUBP0BkMFHEGngRJloLK+ArlwLtNiZCCKGVH059IKEbp/wuoYTEfvWtTyD4JxFuPvR6v0OAzt2aXF+b9T1G2XopityVG3BI/hThfZyWrSxfyKWt70ktgcPa6HwxfmFHxFEhUa0P23jVS+HDvqOQ=
-    - secure: HNH1Y+BzvWH5VGgy6THTo7TLWTpdwIdtYxFC5EPRTi2HxqttL2MSF2qPwlXbBXs/KJSVfkseOukWHJBd0vSWHhBpdmp2htHmbbcgB/YEa1DrW29U4JseIImxeHrOrxqrCyQhfRBZEIpCyi2lLEIfIm8SCqXi4IjUNE2oPMQrcpCeiMtv3mWRJFL+svGjsxMdts2BNb4Tvm1lnG5qZMLqEVs1LYCsOaQGJfdqyjNWDDEtjNIgP+57bgn/dwC9M+3lr+QD2Zx5/uMPtCHKpz9H1EMDYQDvaKnS2gd0fYrOgFSAmh/9+F8q7WFqihU6ugElSUsAPHU5SmlOKw22AxPYPcduzZsryEU+5xt8PIROUUTWPl1NsHJbgLKB2TyUKsabuWm+urkFBgRu2zXM8KclsYsINkBz3Uq4upBGV1dt5WyY5ROhbiwpnlFUrHfQ+qFvHrbhuzIpemM180Mz9Ca5ld+M9QbqWGdd56wsQH/HtSBe+wdx7zV9rXw5cPeb4h98v3p8tk15sKBL1wQUFHrVyeJOFNvgPx6V1t2gJiv9wOWWQkIw14RN5N09FPSjm0bgmcSNzqneO92o92pfPHMJzgjjOxgscRtJDEsn3B/XDOlw2OX6b3+Vzqvr134cYPqWUyqrJw7YmtL/fwe6gkEB86k7g2CQX9TzIPeO3knljjM=
+  matrix:
+  # - INSTANCE=smoke-package-stable-centos-6 # terribly slow; takes more than 45 minutes
+  - INSTANCE=smoke-package-stable-centos-7
+  - INSTANCE=smoke-package-stable-debian-9
+  - INSTANCE=smoke-package-stable-ubuntu-1604
+  - INSTANCE=smoke-package-stable-ubuntu-1804
+  # - INSTANCE=smoke-war-stable-centos-6 # terribly slow; takes more than 45 minutes
+  - INSTANCE=smoke-war-stable-centos-7
+  - INSTANCE=smoke-war-stable-debian-8
+  - INSTANCE=smoke-war-stable-debian-9
+  - INSTANCE=smoke-war-stable-ubuntu-1604
+  - INSTANCE=smoke-war-stable-ubuntu-1804
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(chef shell-init bash)"
   - chef --version
-  - cookstyle --version
-  - foodcritic --version
-  - gem install glare --version 0.8.0
-script:
-  - 'if [ "$TRAVIS_REPO_SLUG" = "peertransfer/glare-cookbook" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then KITCHEN_LOCAL_YAML=.kitchen.yml kitchen verify ${INSTANCE}; fi'
 
-after_script:
-  - docker images
-  - docker ps -a
-  - cat .kitchen/logs/kitchen.log
+script: KITCHEN_LOCAL_YAML=kitchen.dokken.yml kitchen verify ${INSTANCE}
 
-jobs:
+matrix:
   include:
-    - script: cookstyle
-      env: COOKSTYLE=1
-    - script: foodcritic . --exclude spec -f any -P
-      env: FOODCRITIC=1
-    - script: chef exec delivery local all
+    - script:
+      - chef exec delivery local all
       env:
-        - CHEFSPEC=1
-
-before_deploy:
-  - openssl aes-256-cbc -K $encrypted_e61592b9331f_key -iv $encrypted_e61592b9331f_iv -in .travis/ssh_rsa.enc -out .travis/client.pem -d
-
-deploy:
-  provider: chef_supermarket
-  user_id: flywire
-  client_key: ".travis/client.pem"
-  category: Others
-  on:
-    tags: true
+        - UNIT_AND_LINT=1
+        - CHEF_LICENSE=accept
