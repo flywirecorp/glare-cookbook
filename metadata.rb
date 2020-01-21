@@ -3,7 +3,7 @@ maintainer 'Flywire'
 maintainer_email 'engineering@flywire.com'
 license 'MIT'
 description 'Manages Cloudflare resources via API v4'
-version '1.4.0'
+version '1.5.0'
 
 source_url 'https://github.com/peertransfer/glare-cookbook'
 issues_url 'https://github.com/peertransfer/glare-cookbook/issues'
@@ -14,4 +14,4 @@ supports 'centos'
 
 chef_version '>= 12.6'
 
-gem 'glare', '~> 0.8'
+gem 'glare', '~> 1.0'
